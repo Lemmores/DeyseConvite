@@ -9,12 +9,26 @@ import Rsvp from './components/Rsvp';
 import Presentes from './components/Presentes';
 
 function App() {
-  const fotos = [
-    { url: '/images/foto1.jpg', legenda: 'Lemos Party - Flashback 1' },
-    { url: '/images/foto2.jpg', legenda: 'Momentos Incríveis' },
-    { url: '/images/foto3.jpg', legenda: 'Com a galera' },
-    { url: '/images/foto4.jpg', legenda: 'Comemoração 2025' },
-  ];
+  // Lógica para gerar as 83 fotos dinamicamente
+  const fotos = Array.from({ length: 83 }, (_, i) => {
+    const numero = i + 1;
+    let legenda = '';
+
+    if (numero >= 1 && numero <= 29) {
+      legenda = `Lemos Party 2023 - Momento ${numero}`;
+    } else if (numero >= 30 && numero <= 61) {
+      legenda = `Lemos Party 2024 - Momento ${numero}`;
+    } else if (numero >= 62 && numero <= 63) {
+      legenda = `Lemos Party Online 2022`;
+    } else if (numero >= 64 && numero <= 83) {
+      legenda = `Lemos Party 2025 - Momento ${numero}`;
+    }
+
+    return {
+      url: `/images/${numero}.png`,
+      legenda: legenda
+    };
+  });
 
   return (
     <div className="bg-slate-50 min-h-screen font-sans">
@@ -39,7 +53,7 @@ function App() {
             Estr. de Belém, 692 - Campo Grande, Recife
           </p>
           <a 
-            href="https://maps.app.goo.gl/3" 
+            href="https://maps.app.goo.gl/YourActualLinkHere" 
             target="_blank" 
             rel="noreferrer"
             className="inline-block mt-4 bg-[#c7ab79] text-white px-8 py-2 rounded-full text-sm font-bold shadow-lg hover:brightness-110 transition"
@@ -51,7 +65,7 @@ function App() {
 
       <main className="max-w-5xl mx-auto px-4 py-12 space-y-16">
         
-        {/* 2. GALERIA DE FOTOS DINÂMICA */}
+        {/* 2. GALERIA DE FOTOS DINÂMICA (AUTOPLAY ATIVO) */}
         <section>
           <h2 className="text-3xl font-bold text-center mb-10 text-gray-800 italic uppercase tracking-widest">📸 Momentos Especiais</h2>
           
@@ -61,10 +75,13 @@ function App() {
             slidesPerView={1}
             loop={true}
             autoplay={{
-              delay: 3000,
+              delay: 2500, // Passa as fotos a cada 2.5 segundos
               disableOnInteraction: false,
             }}
-            pagination={{ clickable: true }}
+            pagination={{ 
+              clickable: true,
+              dynamicBullets: true // Ajuda a não poluir com 83 pontinhos
+            }}
             breakpoints={{
               640: { slidesPerView: 2 },
               1024: { slidesPerView: 3 },
@@ -73,15 +90,16 @@ function App() {
           >
             {fotos.map((foto, index) => (
               <SwiperSlide key={index}>
-                <div className="relative h-80 overflow-hidden rounded-2xl shadow-xl border-4 border-white">
+                <div className="relative h-80 overflow-hidden rounded-2xl shadow-xl border-4 border-white bg-gray-200">
                   <img 
                     src={foto.url} 
                     alt={foto.legenda} 
                     className="w-full h-full object-cover"
-                    onError={(e) => { e.target.src = "https://via.placeholder.com/400x600?text=Sua+Foto+Aqui"; }}
+                    loading="lazy" // Melhora a performance com muitas fotos
+                    onError={(e) => { e.target.src = "https://via.placeholder.com/400x600?text=Carregando..."; }}
                   />
                   <div className="absolute bottom-0 bg-gradient-to-t from-black/80 to-transparent w-full p-4">
-                    <p className="text-white text-sm italic">{foto.legenda}</p>
+                    <p className="text-white text-xs md:text-sm italic">{foto.legenda}</p>
                   </div>
                 </div>
               </SwiperSlide>
@@ -89,7 +107,7 @@ function App() {
           </Swiper>
         </section>
 
-        {/* 3. SEÇÃO AFTER-PARTY (COM A NOVA COR #c7ab79) */}
+        {/* 3. SEÇÃO AFTER-PARTY */}
         <section className="bg-[#c7ab79] p-8 rounded-[2rem] shadow-2xl transform md:-rotate-1 flex flex-col md:flex-row items-center justify-between gap-6 border-4 border-[#292a2a]">
           <div className="text-center md:text-left">
             <h2 className="text-4xl font-black text-[#292a2a] uppercase tracking-tighter italic">The After Party! 🕺</h2>
@@ -105,8 +123,11 @@ function App() {
         <div className="grid md:grid-cols-2 gap-10">
           <div className="bg-white p-6 rounded-3xl shadow-lg border border-gray-100">
             <h3 className="text-2xl font-bold mb-4 text-[#292a2a]">🎵 Playlist da Festa</h3>
-            <div className="rounded-xl overflow-hidden shadow-inner bg-gray-100 h-[152px] flex items-center justify-center border border-dashed border-[#c7ab79]">
-               <p className="text-gray-400 italic text-sm text-center px-4">Insira o Iframe do Spotify aqui</p>
+            <div className="rounded-xl overflow-hidden shadow-inner bg-gray-100">
+               {/* Lembre-se de colocar o iframe real do Spotify aqui */}
+               <div className="h-[152px] flex items-center justify-center border border-dashed border-[#c7ab79]">
+                 <p className="text-gray-400 italic text-sm text-center px-4">Playlist Carregando...</p>
+               </div>
             </div>
           </div>
 
