@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const Presentes = () => {
   const [copiado, setCopiado] = useState(false);
-  const chavePix = "seu-email@exemplo.com"; // <-- COLOQUE SUA CHAVE AQUI
+  const chavePix = "marcelo.hslf@gmailcom"; // <-- COLOQUE SUA CHAVE AQUI
 
   const copiarChave = () => {
     navigator.clipboard.writeText(chavePix);
