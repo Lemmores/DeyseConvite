@@ -25,56 +25,80 @@ function App() {
   ];
 
   return (
-    <div className="bg-slate-50 min-h-screen font-sans">
+    <div className="bg-[#131314] min-h-screen font-sans text-gray-200">
       
-      {/* HEADER COMPACTO */}
-      <header className="bg-[#292a2a] text-white py-10 px-4 text-center border-b-4 border-[#c7ab79]">
+      {/* HEADER ULTRA COMPACTO */}
+      <header className="bg-[#f0f4f9] py-8 px-4 text-center border-b border-gray-300">
         <img 
           src="/images/logo.png" 
           alt="Lemos Party Logo" 
-          className="w-24 md:w-32 mx-auto mb-4 drop-shadow-2xl"
+          className="w-28 md:w-36 mx-auto mb-4" 
         />
-        <h1 className="text-4xl md:text-6xl font-extrabold mb-2 tracking-tighter uppercase italic">
+        <h1 className="text-2xl md:text-3xl font-black tracking-tighter uppercase italic text-[#1e1e1f]">
           Lemos Party 2026!
         </h1>
-        <p className="text-lg md:text-xl opacity-90 font-light italic">Você está convidado(a)!</p>
-        
-        <div className="mt-6 bg-white/5 inline-block p-5 rounded-3xl backdrop-blur-md border border-white/10 shadow-2xl">
-          <p className="font-bold text-base md:text-lg text-[#c7ab79]">📅 07 de Maio | ⏰ 18h00</p>
-          <p className="mt-1 text-xs md:text-sm text-gray-300">
-            📍 Passira Pizzaria e Restaurante <br/> 
-            Estr. de Belém, 692 - Campo Grande, Recife
-          </p>
-          <a 
-            href="https://maps.app.goo.gl/9yGZ3p5Z8X8X8X8X8" 
-            target="_blank" 
-            rel="noreferrer"
-            className="inline-block mt-3 bg-[#c7ab79] text-white px-6 py-2 rounded-full text-xs font-bold shadow-lg hover:scale-105 transition transform"
-          >
-            Abrir no Maps 📍
-          </a>
-        </div>
+        <p className="text-xs md:text-sm text-gray-500 font-medium uppercase tracking-[0.2em]">Você está convidado(a)!</p>
       </header>
 
-      <main className="max-w-5xl mx-auto px-4 py-12 space-y-16">
+      <main className="max-w-5xl mx-auto px-4 py-10 space-y-16">
         
+        {/* SEÇÃO LOCAL/DATA: ESTILO TIMELINE / INFO BAR */}
+        <section className="relative overflow-hidden">
+          <div className="bg-[#1e1e1f] rounded-[2.5rem] border border-white/5 p-2 md:p-4 shadow-2xl">
+            <div className="flex flex-col md:flex-row items-stretch justify-around divide-y md:divide-y-0 md:divide-x divide-white/10">
+              
+              {/* ITEM DATA */}
+              <div className="flex-1 py-6 md:py-4 px-6 flex items-center gap-4 group">
+                <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-xl group-hover:bg-white group-hover:text-black transition-all">📅</div>
+                <div>
+                  <h4 className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Data</h4>
+                  <p className="text-lg font-black text-white">09 de Maio</p>
+                </div>
+              </div>
+
+              {/* ITEM HORA */}
+              <div className="flex-1 py-6 md:py-4 px-6 flex items-center gap-4 group">
+                <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-xl group-hover:bg-white group-hover:text-black transition-all">⏰</div>
+                <div>
+                  <h4 className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Horário</h4>
+                  <p className="text-lg font-black text-white">17h00</p>
+                </div>
+              </div>
+
+              {/* ITEM LOCAL */}
+              <div className="flex-[1.5] py-6 md:py-4 px-6 flex items-center justify-between group">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-xl group-hover:bg-white group-hover:text-black transition-all">📍</div>
+                  <div>
+                    <h4 className="text-[10px] font-bold text-gray-500 uppercase tracking-widest text-left">Local</h4>
+                    <p className="text-sm font-bold text-white text-left">NALA LAND</p>
+                  </div>
+                </div>
+                <a 
+                  href="https://maps.app.goo.gl/fxx4SwbuMGM7rdjy7" 
+                  target="_blank" 
+                  rel="noreferrer"
+                  className="bg-white text-black text-[10px] font-black py-2 px-4 rounded-full hover:bg-gray-200 transition-colors uppercase"
+                >
+                  Mapa
+                </a>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
         {/* GALERIA DE FOTOS */}
         <section>
-          <h2 className="text-3xl font-bold text-center mb-10 text-gray-800 italic uppercase tracking-widest">📸 Nossa Jornada</h2>
+          <h2 className="text-xl font-bold text-center mb-8 text-white italic uppercase tracking-[0.3em]">📸 Nossa Jornada</h2>
           <Swiper
             modules={[Autoplay, Pagination]}
             spaceBetween={20}
             slidesPerView={1}
             loop={true}
             speed={800}
-            autoplay={{
-              delay: 1500,
-              disableOnInteraction: false,
-            }}
-            pagination={{ 
-              clickable: true,
-              dynamicBullets: true 
-            }}
+            autoplay={{ delay: 2500, disableOnInteraction: false }}
+            pagination={{ clickable: true, dynamicBullets: true }}
             breakpoints={{
               640: { slidesPerView: 2 },
               1024: { slidesPerView: 3 },
@@ -83,7 +107,7 @@ function App() {
           >
             {fotos.map((foto, index) => (
               <SwiperSlide key={index}>
-                <div className="relative h-[450px] md:h-80 overflow-hidden rounded-2xl shadow-xl border-4 border-white bg-gray-200">
+                <div className="relative h-80 overflow-hidden rounded-2xl shadow-xl border border-white/5 bg-gray-800">
                   <img 
                     src={foto.url} 
                     alt={foto.legenda} 
@@ -93,7 +117,7 @@ function App() {
                     onError={(e) => { e.target.src = "https://via.placeholder.com/400x600?text=Lemos+Party"; }}
                   />
                   <div className="absolute bottom-0 bg-gradient-to-t from-black/90 to-transparent w-full p-4 pt-10">
-                    <p className="text-[#c7ab79] font-bold text-sm uppercase tracking-wider">{foto.legenda}</p>
+                    <p className="text-white font-bold text-[10px] uppercase tracking-widest">{foto.legenda}</p>
                   </div>
                 </div>
               </SwiperSlide>
@@ -101,31 +125,34 @@ function App() {
           </Swiper>
         </section>
 
-        {/* AFTER-PARTY */}
-        <section className="bg-[#c7ab79] p-8 rounded-[2rem] shadow-2xl transform md:-rotate-1 flex flex-col md:flex-row items-center justify-between gap-6 border-4 border-[#292a2a]">
+       {/* AFTER-PARTY */}
+        <section className="bg-white p-8 rounded-[2.5rem] shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="text-center md:text-left">
-            <h2 className="text-4xl font-black text-[#292a2a] uppercase tracking-tighter italic">The After Party! 🕺</h2>
-            <p className="text-[#292a2a] font-bold mt-2 text-lg">A noite não acaba na pizzaria! Partiu Karokê no Chalé!</p>
+            <h2 className="text-3xl font-black text-[#1e1e1f] uppercase tracking-tighter italic">The After Party! 🕺</h2>
+            <p className="text-gray-500 font-bold mt-1 text-sm">A noite não acaba tão cedo! Partiu Karokê no Chalé!</p>
           </div>
-          <div className="bg-[#292a2a] text-white px-8 py-4 rounded-2xl font-black text-xl shadow-lg">
+          
+          <a 
+            href="https://maps.app.goo.gl/TVmztwfnp4J3tK9XA" 
+            target="_blank" 
+            rel="noreferrer"
+            className="bg-[#1e1e1f] text-white px-8 py-3 rounded-2xl font-black text-lg shadow-lg hover:bg-black hover:scale-105 transition transform text-center"
+          >
             PARTIU! 🚀
-          </div>
+          </a>
         </section>
 
-        {/* INFO E PLAYLIST (ATUALIZADA) */}
-        <div className="grid md:grid-cols-2 gap-10">
-          <div className="bg-white p-4 rounded-3xl shadow-lg border border-gray-100">
-            <h3 className="text-2xl font-bold mb-4 text-[#292a2a] px-2">🎵 Playlist da Festa</h3>
-            <div className="rounded-xl overflow-hidden shadow-lg">
-               {/* SEU IFRAME DO SPOTIFY AQUI */}
+        {/* INFO E PLAYLIST */}
+        <div className="grid md:grid-cols-2 gap-8">
+          <div className="bg-[#1e1e1f] p-4 rounded-3xl border border-white/5 shadow-xl">
+            <h3 className="text-xl font-bold mb-4 text-white px-2">🎵 Playlist</h3>
+            <div className="rounded-xl overflow-hidden shadow-lg bg-black/20">
                <iframe 
-                data-testid="embed-iframe" 
                 style={{ borderRadius: '12px' }} 
-                src="https://open.spotify.com/embed/playlist/37i9dQZF1EQncLwOalG3K7?utm_source=generator&theme=0" 
+                src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM3M" 
                 width="100%" 
-                height="352" 
+                height="152" 
                 frameBorder="0" 
-                allowFullScreen="" 
                 allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
                 loading="lazy"
                 title="Spotify Playlist"
@@ -133,27 +160,43 @@ function App() {
             </div>
           </div>
 
-          <div className="bg-white p-6 rounded-3xl shadow-lg border border-gray-100">
-            <h3 className="text-2xl font-bold mb-4 text-[#292a2a]">❓ Informações</h3>
-            <div className="space-y-4 text-gray-700 font-medium text-sm md:text-base">
-              <p className="flex items-center gap-2">👕 <strong className="text-[#c7ab79]">Traje:</strong> Esporte Fino</p>
-              <p className="flex items-center gap-2">👶 <strong className="text-[#c7ab79]">Crianças:</strong> Super bem-vindas!</p>
-              <p className="flex items-center gap-2">🚗 <strong className="text-[#c7ab79]">Estacionamento:</strong> Gratuito no local</p>
-              <p className="flex items-center gap-2">🍕 <strong className="text-[#c7ab79]">Consumo:</strong> Rodízio Individual</p>
-            </div>
-          </div>
+          <div className="bg-[#1e1e1f] p-6 rounded-3xl border border-white/5 shadow-xl">
+  <h3 className="text-xl font-bold mb-4 text-white uppercase tracking-widest text-xs">❓ Detalhes</h3>
+  <div className="space-y-4 text-gray-400 font-medium text-xs md:text-sm">
+    <p className="flex items-center gap-3">
+      🎟️ <span className="text-white font-bold">Reserva:</span> R$ 25,00 por pessoa 
+    </p>
+    <p className="flex items-center gap-3">
+      👕 <span className="text-white font-bold">Traje:</span> Livre (Vá como se sentir melhor!)
+    </p>
+    <p className="flex items-center gap-3">
+      👫 <span className="text-white font-bold">Acompanhantes:</span> Permitidos (Favor informar antes)
+    </p>
+    <p className="flex items-center gap-3">
+      🍕 <span className="text-white font-bold">Consumo:</span> Comanda Individual 
+    </p>
+    <p className="flex items-center gap-3">
+      🚗 <span className="text-white font-bold">Estacionamento:</span> Gratuito no local
+    </p>
+    <p className="flex items-center gap-3">
+      🎤 <span className="text-white font-bold">After:</span> Karaokê no Chalé a partir das 22:30
+    </p>
+    <p className="flex items-center gap-3">
+      🎁 <span className="text-white font-bold">Presentes:</span> Se quiser me mimar, veja a seção abaixo!</p>
+  </div>
+</div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 items-start">
+        <div className="grid md:grid-cols-2 gap-8 items-start text-[#1e1e1f]">
           <Presentes />
           <Rsvp />
         </div>
 
       </main>
 
-      <footer className="text-center py-12 text-gray-400 border-t bg-white mt-10">
-        <p className="font-bold text-gray-600">Espero você para comemorar comigo! ✨</p>
-        <p className="text-xs mt-2 uppercase tracking-[0.3em]">#LemosParty2026</p>
+      <footer className="text-center py-12 text-gray-600 border-t border-white/5 bg-[#1e1e1f] mt-10">
+        <p className="font-bold text-sm">Espero você para comemorar comigo!</p>
+        <p className="text-[10px] mt-2 uppercase tracking-[0.4em]">#LemosParty2026</p>
       </footer>
     </div>
   );
