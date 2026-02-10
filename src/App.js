@@ -18,7 +18,7 @@ function App() {
   };
 
   const fotos = [
-    ...criarAno(59, 78, 'Lemos Party 2025', 'jpg'),
+    ...criarAno(59, 76, 'Lemos Party 2025', 'jpg'),
     ...criarAno(30, 56, 'Lemos Party 2024', 'jpg'),
     ...criarAno(1, 28, 'Lemos Party 2023', 'png'),
     ...criarAno(57, 58, 'Lemos Party Online 2022', 'jpg'),
