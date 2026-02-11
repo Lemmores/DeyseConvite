@@ -21,7 +21,7 @@ function App() {
   };
 
   const fotos = [
-    ...criarAno(1, 21, 'Moments', 'JPEG'),
+    ...criarAno(1, 21, 'Moments', 'jpeg'),
   ];
 
   return (
