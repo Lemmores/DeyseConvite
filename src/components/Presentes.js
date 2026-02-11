@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-const Presentes = () => {
+const Presentes = ({ isDarkMode }) => {
   const [copiado, setCopiado] = useState(false);
-  const chavePix = "marcelo.hslf@gmail.com";
+  const chavePix = "81991954881";
 
   const copiarChave = () => {
     navigator.clipboard.writeText(chavePix);
@@ -11,40 +11,70 @@ const Presentes = () => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-[2rem] shadow-lg border border-gray-100">
-      <h3 className="text-2xl font-bold text-[#1e1e1f] mb-4 text-center italic uppercase tracking-wider">Presentes 🎁</h3>
-      <p className="text-gray-600 text-sm mb-6 text-center">
-        Sua presença é o meu maior presente! Caso deseje me presentear, preparei uma lista ou você pode contribuir via PIX:
+    <div className={`p-6 rounded-[2rem] shadow-xl border transition-colors duration-500 ${
+      isDarkMode ? 'bg-[#1e293b] border-white/5' : 'bg-white border-blue-50'
+    }`}>
+      <h3 className={`text-2xl font-bold mb-4 text-center italic uppercase tracking-wider ${
+        isDarkMode ? 'text-white' : 'text-slate-800'
+      }`}>Ação Solidária 🎁</h3>
+      
+      <p className={`text-sm mb-6 text-center leading-relaxed ${
+        isDarkMode ? 'text-gray-400' : 'text-slate-500'
+      }`}>
+        Meu maior presente é a sua presença! Este ano, decidi transformar meu parabéns em ajuda para quem precisa:
       </p>
       
-      <div className="space-y-3 mb-6">
-        <a 
-          href="https://www.amazon.com.br/hz/wishlist/ls/2W432T92Z6D9Z?ref_=wl_share" 
-          target="_blank" 
-          rel="noreferrer"
-          className="flex items-center justify-between p-4 bg-gray-50 rounded-2xl border border-gray-100 hover:border-black transition-all group"
-        >
-          <span className="font-bold text-gray-700">🛒 Lista na Amazon</span>
-          <span className="text-[#1e1e1f] group-hover:translate-x-1 transition-transform">→</span>
-        </a>
+      <div className="space-y-4 mb-6">
+        {/* Doação de Fraldas */}
+        <div className={`p-4 rounded-2xl border transition-colors ${
+          isDarkMode ? 'bg-white/5 border-white/10' : 'bg-purple-50/50 border-purple-100'
+        }`}>
+          <div className="flex items-center gap-3 mb-2">
+            <span className="text-2xl">👵</span>
+            <span className={`font-bold ${isDarkMode ? 'text-gray-200' : 'text-slate-700'}`}>Casa do Idoso (Paudalho)</span>
+          </div>
+          <p className={`text-xs leading-relaxed ${isDarkMode ? 'text-gray-400' : 'text-slate-600'}`}>
+            Estou arrecadando <span className={`${isDarkMode ? 'text-cyan-400' : 'text-[#a855f7]'} font-bold`}>Fraldas Geriátricas</span> (Tamanhos M e G). Você pode levar no dia da festa!
+          </p>
+        </div>
 
-        <div className="flex items-center justify-between p-4 bg-gray-50 rounded-2xl border border-gray-100 opacity-50">
-          <span className="font-bold text-gray-400">🛒 Lista na Magalu (Em breve)</span>
+        {/* Doação PIX Abrigo */}
+        <div className={`p-4 rounded-2xl border transition-colors ${
+          isDarkMode ? 'bg-white/5 border-white/10' : 'bg-purple-50/50 border-purple-100'
+        }`}>
+          <div className="flex items-center gap-3 mb-2">
+            <span className="text-2xl">🐾</span>
+            <span className={`font-bold ${isDarkMode ? 'text-gray-200' : 'text-slate-700'}`}>Abrigo Seu Alberto</span>
+          </div>
+          <p className={`text-xs leading-relaxed ${isDarkMode ? 'text-gray-400' : 'text-slate-600'}`}>
+            Se preferir presentear em dinheiro, <span className={`${isDarkMode ? 'text-cyan-400' : 'text-[#a855f7]'} font-bold`}>100% do valor</span> arrecadado via PIX será doado para este abrigo.
+          </p>
         </div>
       </div>
 
-      <div className="bg-[#1e1e1f] p-4 rounded-2xl border border-gray-700">
-        <p className="text-[10px] font-bold text-gray-400 uppercase mb-2 tracking-widest">Contribuir via PIX (E-mail)</p>
-        <div className="flex items-center justify-between gap-2">
-          <span className="text-white text-xs font-mono truncate">{chavePix}</span>
+      {/* Área do PIX */}
+      <div className={`p-5 rounded-2xl border transition-colors ${
+        isDarkMode ? 'bg-[#0f172a] border-cyan-500/20' : 'bg-slate-50 border-purple-100'
+      }`}>
+        <p className={`text-[10px] font-bold uppercase mb-2 tracking-widest text-center ${
+          isDarkMode ? 'text-cyan-400' : 'text-[#a855f7]'
+        }`}>Chave PIX Solidário</p>
+        <div className="flex flex-col items-center gap-3">
+          <span className={`text-lg font-mono font-bold tracking-wider ${isDarkMode ? 'text-white' : 'text-slate-800'}`}>{chavePix}</span>
           <button 
             onClick={copiarChave}
-            className="bg-white text-[#1e1e1f] text-[10px] px-4 py-2 rounded-xl font-black uppercase hover:bg-gray-200 transition"
+            className={`w-full text-white text-xs py-3 rounded-xl font-black uppercase transition shadow-lg active:scale-95 ${
+              isDarkMode ? 'bg-cyan-500 shadow-cyan-500/20 hover:bg-cyan-400' : 'bg-[#a855f7] shadow-purple-200 hover:bg-[#9333ea]'
+            }`}
           >
-            {copiado ? "Copiado!" : "Copiar"}
+            {copiado ? "✨ Chave Copiada!" : "Copiar Chave PIX"}
           </button>
         </div>
       </div>
+
+      <p className="mt-4 text-[9px] text-slate-400 text-center uppercase tracking-widest">
+        Obrigada por me ajudar a fazer o bem! ❤️
+      </p>
     </div>
   );
 };

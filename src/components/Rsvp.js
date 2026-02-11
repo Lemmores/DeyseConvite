@@ -1,79 +1,65 @@
 import React, { useState } from 'react';
 
-const Rsvp = () => {
+const Rsvp = ({ isDarkMode }) => {
   const [nome, setNome] = useState('');
-  const [convidados, setConvidados] = useState('0');
 
   const enviarWhats = (e) => {
     e.preventDefault();
-    
-    // Calcula o valor total (Convidado + Acompanhantes) * 25
-    const totalPessoas = parseInt(convidados) + 1;
-    const valorReserva = totalPessoas * 25;
-
-    // Mensagem estruturada para o seu WhatsApp
-    const texto = `Oi! Confirmo minha presença na Lemos Party 2026! 🥂
-
-👤 Nome: ${nome}
-👥 Acompanhantes: ${convidados}
-🎟️ Reserva Total: R$ ${valorReserva},00
-
-Vou te enviar o comprovante do PIX agora! ✅`;
-
-    // Seu número configurado corretamente
-    const numero = "5581981779732"; 
-    
-    // Abre o WhatsApp com a mensagem pronta
+    const texto = `Oie Deyse! Confirmo minha presença na sua festa de aniversário de 31 anos - Summer Edition! \n\n Eu, ${nome}, já estou ansioso(a) para comemorar com você!`;
+    const numero = "5581991954881"; 
     window.open(`https://wa.me/${numero}?text=${encodeURIComponent(texto)}`, '_blank');
   };
 
   return (
-    <div className="bg-white p-6 rounded-[2rem] shadow-lg border border-gray-100">
-      <h3 className="text-2xl font-bold text-[#1e1e1f] mb-4 text-center italic uppercase tracking-wider">Confirmar Presença ✅</h3>
+    <div className={`p-6 rounded-[2rem] shadow-xl border transition-colors duration-500 ${
+      isDarkMode ? 'bg-[#1e293b] border-white/5' : 'bg-white border-blue-50'
+    }`}>
+      <h3 className={`text-2xl font-bold mb-4 text-center italic uppercase tracking-wider ${
+        isDarkMode ? 'text-white' : 'text-slate-800'
+      }`}>Tô dentro! ✅</h3>
       
-      <form onSubmit={enviarWhats} className="space-y-4">
+      <form onSubmit={enviarWhats} className="space-y-6">
         <div>
-          <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">Seu Nome Completo</label>
+          <label className={`block text-[10px] font-bold uppercase tracking-widest mb-2 ml-1 ${
+            isDarkMode ? 'text-cyan-400' : 'text-[#a855f7]'
+          }`}>
+            Seu Nome Completo
+          </label>
           <input 
             required
             type="text" 
-            placeholder="Digite seu nome completo"
-            className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-gray-200 outline-none text-gray-800"
+            placeholder="Como quer ser chamado(a)?"
+            className={`w-full p-4 rounded-xl outline-none transition-all border ${
+              isDarkMode 
+              ? 'bg-[#0f172a] border-white/10 text-white focus:ring-2 focus:ring-cyan-500 placeholder:text-gray-600' 
+              : 'bg-blue-50/30 border-blue-100 text-slate-700 focus:ring-2 focus:ring-[#a855f7] placeholder:text-slate-400'
+            }`}
             value={nome}
             onChange={(e) => setNome(e.target.value)}
           />
         </div>
 
-        <div>
-          <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">Acompanhantes 👥</label>
-          <select 
-            className="w-full p-3 border border-gray-200 rounded-xl outline-none text-gray-800 bg-white cursor-pointer"
-            value={convidados}
-            onChange={(e) => setConvidados(e.target.value)}
-          >
-            <option value="0">Vou sozinho(a)</option>
-            <option value="1">Levo +1 acompanhante</option>
-        
-          </select>
-        </div>
-
-        {/* Alerta da Taxa de Reserva */}
-        <div className="bg-gray-50 p-4 rounded-2xl border border-dashed border-gray-300">
-          <p className="text-[10px] text-gray-600 text-center uppercase font-bold tracking-tight">
-            Taxa de reserva: R$ 25,00 por pessoa. <br/>
-            Sua vaga será garantida após o envio do PIX.
+        {/* Banner informativo */}
+        <div className={`p-4 rounded-2xl border transition-colors ${
+          isDarkMode ? 'bg-white/5 border-white/10' : 'bg-slate-50 border-blue-50'
+        }`}>
+          <p className={`text-[10px] text-center uppercase font-bold tracking-widest leading-relaxed ${
+            isDarkMode ? 'text-gray-400' : 'text-slate-500'
+          }`}>
+            📍 Convite Individual e Intransferível <br/>
+            <span className={isDarkMode ? 'text-white' : 'text-[#3b82f6]'}>Sua presença é essencial!</span>
           </p>
         </div>
 
         <button 
           type="submit" 
-          className="w-full bg-[#1e1e1f] text-white py-4 rounded-2xl font-black uppercase hover:bg-black transition-all shadow-lg active:scale-95"
+          className="w-full bg-gradient-to-r from-[#3b82f6] via-[#6366f1] to-[#a855f7] text-white py-4 rounded-2xl font-black uppercase hover:opacity-90 transition-all shadow-lg shadow-purple-200 active:scale-95"
         >
-          Confirmar pelo WhatsApp
+          Confirmar no WhatsApp
         </button>
 
-        <p className="text-[10px] text-center text-gray-400 uppercase tracking-widest font-medium">
-          Isso abrirá uma conversa com Marcelo
+        <p className="text-[9px] text-center text-slate-400 uppercase tracking-[0.2em] font-medium leading-tight">
+          Ao clicar, você será redirecionado <br/> para o WhatsApp da Deyse.
         </p>
       </form>
     </div>
